@@ -17,45 +17,46 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
+
   build-test-backend:
     docker:
         - image: cimg/rust:1.70.0
-        - image: cimg/postgres:15.3.0
-        environment:
-          # Fail the build if there are warnings
-          RUSTFLAGS: '-D warnings'
-        steps:
-          - checkout
-          - run:
-              name: Version information
-              command: rustc --version; cargo --version; rustup --version
-          - restore_cache:
-              keys:
-                - v1-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
-          - run: 
-              name: Install postresgl libs
-              #command: |
-              #  sudo apt install -y postgresql-client-14 postgresql-client-common; \
-              #  cargo install --version=0.5.7 sqlx-cli --no-default-features --features postgres
-          - run:
-              name: Migrate database
-              #command: SKIP_DOCKER=true ./scripts/init_db.sh
-          - run:
-              name: Check sqlx-data.json is up-to-date
-              #command: cargo sqlx prepare --check -- --bin zero2prod
-          - run:
-              name: Build all targets
-              command: cargo build
-          - save_cache:
-              paths:
-                - /usr/local/cargo/registry
-                - target/debug/.fingerprint
-                - target/debug/build
-                - target/debug/deps
-              key: v1-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
-          - run:
-              name: Run all backend tests
-              command: cargo test
+        - image: cimg/postgres:15.3
+    environment:
+      # Fail the build if there are warnings
+      RUSTFLAGS: '-D warnings'
+    steps:
+      - checkout
+      - run:
+          name: Version information
+          command: rustc --version; cargo --version; rustup --version
+      - restore_cache:
+          keys:
+            - v1-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
+      #- run: 
+          #name: Install postresgl libs
+          #command: |
+          #  sudo apt install -y postgresql-client-14 postgresql-client-common; \
+          #  cargo install --version=0.5.7 sqlx-cli --no-default-features --features postgres
+      #- run:
+          #name: Migrate database
+          #command: SKIP_DOCKER=true ./scripts/init_db.sh
+      #- run:
+          #name: Check sqlx-data.json is up-to-date
+          #command: cargo sqlx prepare --check -- --bin zero2prod
+      - run:
+          name: Build all targets
+          command: cargo build
+      - save_cache:
+          paths:
+            - /usr/local/cargo/registry
+            - target/debug/.fingerprint
+            - target/debug/build
+            - target/debug/deps
+          key: v1-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
+      - run:
+          name: Run all backend tests
+          command: cargo test
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -63,10 +64,7 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-  build-test-ui:
-    jobs:
-      - tbd
-  build-test-backend:
+  build-test:
     jobs:
       - build-test-backend
 
