@@ -6,6 +6,19 @@ version: 2.1
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   
+  lint:
+    docker:
+        - image: cimg/rust:1.70.0
+        - image: cimg/postgres:15.3
+    steps:
+      - checkout
+      - run:
+          name: Install Clippy
+          command: rustup component add clippy
+      - run:
+          name: Linting
+          command: cargo clippy -- -D warnings
+  
   build-test-backend:
     docker:
         - image: cimg/rust:1.70.0
@@ -51,5 +64,6 @@ jobs:
 workflows:
   build-test:
     jobs:
+      - lint
       - build-test-backend
 
