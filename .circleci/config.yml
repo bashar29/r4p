@@ -17,9 +17,8 @@ jobs:
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
-  build-test-backend: 
+  build-test-backend:
     docker:
-          #- image: circleci/rust
         - image: cimg/rust:1.70.0
         - image: cimg/postgres:15.3
         environment:
@@ -70,3 +69,4 @@ workflows:
   build-test-backend:
     jobs:
       - build-test-backend
+
