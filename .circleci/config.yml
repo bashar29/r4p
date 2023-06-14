@@ -20,7 +20,7 @@ jobs:
   build-test-backend:
     docker:
         - image: cimg/rust:1.70.0
-        - image: cimg/postgres:15.3
+        - image: cimg/postgres:15.3.0
         environment:
           # Fail the build if there are warnings
           RUSTFLAGS: '-D warnings'
