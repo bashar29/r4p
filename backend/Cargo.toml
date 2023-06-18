@@ -5,5 +5,18 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+
+# All logic in a lib to enable integration test. In main.rs (binary entry point) 
+# there is only a slim main function 
+[lib]
+path="src/lib.rs"
+
+[[bin]]
+path = "src/main.rs"
+name = "r4p_backend"
+
 [dependencies]
 actix-web = "4"
+
+[dev-dependencies]
+tokio = "1"
