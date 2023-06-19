@@ -1,4 +1,4 @@
-use actix_web::{get, App, HttpResponse, HttpServer, Responder, dev::Server};
+use actix_web::{dev::Server, get, App, HttpResponse, HttpServer, Responder};
 
 #[get("/")]
 async fn hello() -> impl Responder {
@@ -17,4 +17,3 @@ pub fn run() -> Result<Server, std::io::Error> {
         .run();
     Ok(server)
 }
-
