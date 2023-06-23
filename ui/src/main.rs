@@ -1,4 +1,6 @@
 use yew::prelude::*;
+use yew_bootstrap::component::*;
+use yew_bootstrap::util::*;
 
 #[function_component(MyApp)]
 fn app() -> Html {
@@ -43,6 +45,9 @@ fn app() -> Html {
 
     html! {
         <>
+        {include_cdn()}
+        <Button style={Color::Primary}>{"Primary"}</Button>
+        {include_cdn_js()}
             <h1>{ "RustConf Explorer" }</h1>
             <div>
                 <h3>{"Videos to watch"}</h3>
