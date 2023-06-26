@@ -18,6 +18,20 @@ name = "r4p_backend"
 [dependencies]
 actix-web = "4"
 
+[dependencies.sqlx]
+version = "0.6.3"
+default-features = false
+features = [
+"runtime-actix-rustls",
+"macros",
+"postgres",
+"uuid",
+"chrono",
+"migrate"
+]
+
+
 [dev-dependencies]
 tokio = "1"
 reqwest = "0.11"
+
