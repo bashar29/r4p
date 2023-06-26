@@ -1,4 +1,4 @@
-use backend::run;
+use backend::startup::run;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
