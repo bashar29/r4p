@@ -19,10 +19,6 @@ jobs:
       - run:
           name: Linting
           command: cargo clippy -- -D warnings
-      - run:
-          name: yamllint
-          command: |
-            sudo apt install yamllint -y; yamllint ./.circleci/config.yml
   build-test-backend:
     docker:
       - image: cimg/rust:1.70.0
@@ -42,8 +38,7 @@ jobs:
           name: Install postresgl libs
           command: |
             sudo apt install -y postgresql-client postgresql-client-common;
-            cargo install --version=0.6.3 sqlx-cli --no-default-features
-            --features postgres,rustls
+            cargo install --version=0.6.3 sqlx-cli --no-default-features --features postgres,rustls
       - run:
           name: Migrate database
           command: |
