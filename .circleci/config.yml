@@ -43,10 +43,12 @@ jobs:
           name: Migrate database
           command: |
             cd backend; \
-            SKIP_DOCKER=true ./scripts/init_db.sh
+            SKIP_DOCKER=true ./scripts/init_db.sh;\
+            echo 'export DATABASE_URL="$DATABASE_URL"' >> "$BASH_ENV"
+            source "$BASH_ENV"
       - run:
           name: Check sqlx-data.json is up-to-date
-          command: cargo sqlx prepare --database-url postgres://postgres:password@localhost:5432/r4p --check -- --bin r4p_backend
+          command: cargo sqlx prepare --database-url $DATABASE_URL --check -- --bin r4p_backend
       - run:
           name: Build all targets
           command: cargo build
