@@ -38,10 +38,10 @@ jobs:
           name: Install postresgl libs
           command: |
             sudo apt install -y postgresql-client postgresql-client-common; \
-            cargo install --version=0.6.3 sqlx-cli --no-default-features --features postgres,rustls,uuid,chrono
+            cargo install --version=0.6.3 sqlx-cli --no-default-features --features postgres,rustls
       - run:
           name: Migrate database
-          command: SKIP_DOCKER=true ./scripts/init_db.sh
+          command: SKIP_DOCKER=true ./backend/scripts/init_db.sh
       - run:
           name: Check sqlx-data.json is up-to-date
           command: cargo sqlx prepare --check -- --bin backend
