@@ -2,14 +2,14 @@
 CREATE TABLE companies(
     id uuid NOT NULL,
     PRIMARY KEY (id),
-    name TEXT NOT NULL UNIQUE
+    company_name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE recipients(
     id uuid NOT NULL,
     PRIMARY KEY (id),
     email TEXT NOT NULL UNIQUE,
-    companies_id uuid NOT NULL
+    company_id uuid NOT NULL
         REFERENCES companies(id)
 );
 
