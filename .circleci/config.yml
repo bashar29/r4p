@@ -38,7 +38,8 @@ jobs:
           name: Install postresgl libs
           command: |
             sudo apt install -y postgresql-client postgresql-client-common;
-            cargo install --version=0.6.3 sqlx-cli --no-default-features --features postgres,rustls
+            cargo install --version=0.6.3 sqlx-cli --no-default-features \
+            --features postgres,rustls
       - run:
           name: Migrate database
           command: |
@@ -48,8 +49,8 @@ jobs:
           name: Check sqlx-data.json is up-to-date
           command: |
             cd backend;
-            cargo sqlx prepare --database-url
-            postgres://postgres:password@localhost:5432/r4p
+            cargo sqlx prepare --database-url \
+            postgres://postgres:password@localhost:5432/r4p \
             --check -- --bin r4p_backend
       - run:
           name: Build all targets
