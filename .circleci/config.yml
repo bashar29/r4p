@@ -38,8 +38,7 @@ jobs:
           name: Install postresgl libs
           command: |
             sudo apt install -y postgresql-client postgresql-client-common; \
-            cargo install --version=0.6.3 sqlx-cli --no-default-features \
-            --features postgres,runtime-actix-rustls,macros,migrate,uuid,chrono
+            cargo install --version=0.6.3 sqlx-cli --no-default-features --features postgres,runtime-actix-rustls
       - run:
           name: Migrate database
           command: SKIP_DOCKER=true ./scripts/init_db.sh
