@@ -37,7 +37,7 @@ jobs:
       - run: 
           name: Install postresgl libs
           command: |
-            sudo apt install -y postgresql-client-15 postgresql-client-common; \
+            sudo apt install -y postgresql-client postgresql-client-common; \
             cargo install --version=0.6.3 sqlx-cli --no-default-features --features postgres
       - run:
           name: Migrate database
