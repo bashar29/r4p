@@ -52,7 +52,8 @@ sqlx database create
 sqlx migrate run
 
 # Add references data
-psql "${DATABASE_URL}" -f ./scripts/populate_references_data.sql 
+# psql "${DATABASE_URL}" -f ./scripts/populate_references_data.sql 
+# Using migration to add the reference data
 
 >&2 echo "Postgres has been migrated, ready to go!"
 
