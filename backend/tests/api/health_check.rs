@@ -1,9 +1,9 @@
-use crate::utils;
+use crate::helpers;
 
 #[actix_web::test]
 async fn health_check_works() {
     // Arrange
-    let test_app = utils::spawn_app().await;
+    let test_app = helpers::spawn_app().await;
     let client = reqwest::Client::new();
 
     // Act

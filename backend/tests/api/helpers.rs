@@ -1,6 +1,6 @@
-use std::net::TcpListener;
 use backend::configuration;
 use sqlx::PgPool;
+use std::net::TcpListener;
 
 pub struct TestApp {
     pub address: String,
