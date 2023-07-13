@@ -11,12 +11,12 @@ async fn create_account_return_200_for_valid_data() {
     });
 
     // Act
-    let response = test_app.post_account(&creation_body).await;
+    let _response = test_app.post_account(&creation_body).await;
 
     // Assert
     // assert_eq!(200, response.status().as_u16());
 }
 
-async fn create_account_persist_the_new_account() {}
+async fn _create_account_persist_the_new_account() {}
 
-async fn create_account_create_admin_user_for_the_account() {}
+async fn _create_account_create_admin_user_for_the_account() {}
