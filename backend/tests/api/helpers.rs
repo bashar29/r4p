@@ -17,7 +17,7 @@ pub async fn spawn_app() -> TestApp {
     settings.database.database_name = String::from("test-r4p-") + &Uuid::new_v4().to_string();
 
     let connection_pool = configure_database(&settings.database).await;
-    
+
     let server =
         backend::startup::run(listener, connection_pool.clone()).expect("Failed to bind address");
     let _f = tokio::spawn(server);

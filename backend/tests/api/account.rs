@@ -75,6 +75,33 @@ async fn create_account_returns_400_for_invalid_data() {
     }
 }
 
-async fn _create_account_persist_the_new_account() {}
+#[actix_web::test]
+async fn create_account_persist_the_new_account_and_its_admin() {
+    // Arrange
+    let test_app = helpers::spawn_app().await;
+    let valid_creation_body = serde_json::json!({
+        "company_name" : "The company corp.",
+        "admin_lastname" : "Johnson",
+        "admin_firstname" : "Bill",
+        "admin_email" : "bill.johnson@gmail.com"
+    });
 
-async fn _create_account_create_admin_user_for_the_account() {}
+    // Act
+    test_app.post_account(&valid_creation_body).await;
+
+    let saved_account = sqlx::query!("SELECT account_name from accounts",)
+        .fetch_one(&test_app.db_pool)
+        .await
+        .expect("Failed to fetch saved account.");
+
+    let saved_admin = sqlx::query!("SELECT lastname, firstname, email from users")
+        .fetch_one(&test_app.db_pool)
+        .await
+        .expect("Failed to fetch saved user (admin).");
+
+    // Assert
+    assert_eq!(saved_account.account_name, "The company corp.");
+    assert_eq!(saved_admin.lastname, "Johnson");
+    assert_eq!(saved_admin.firstname.unwrap(), "Bill");
+    assert_eq!(saved_admin.email, "bill.johnson@gmail.com");
+}
