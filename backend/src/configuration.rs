@@ -23,6 +23,16 @@ impl DatabaseSettings {
         );
         s
     }
+
+    /// Connection without logical database name, to connect
+    /// to the postgres instance, not to the logical database
+    pub fn connection_string_without_db(&self) -> String {
+        let s = format!(
+            "postgres://{}:{}@{}:{}",
+            self.username, self.password, self.host, self.port
+        );
+        s
+    }
 }
 
 pub fn get_configuration() -> Result<Settings, ConfigError> {

@@ -20,6 +20,10 @@ actix-web = "4"
 serde = "1"
 config = "0"
 
+[dependencies.uuid]
+version = "1.4.0"
+features = ["v4", "fast-rng", "macro-diagnostics"]
+
 [dependencies.sqlx]
 version = "0.6.3"
 default-features = false

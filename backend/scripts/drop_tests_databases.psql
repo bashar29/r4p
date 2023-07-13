@@ -1,0 +1,4 @@
+SELECT 'DROP DATABASE ' || quote_ident(datname) || ';'
+FROM pg_database
+WHERE (datname LIKE 'test-r4p%')
+\gexec
