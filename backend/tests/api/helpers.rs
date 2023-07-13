@@ -48,6 +48,7 @@ impl TestApp {
     }
 }
 
+/// Instantiate de database for the TestApp (create database and apply all migrations)
 async fn configure_database(config: &configuration::DatabaseSettings) -> PgPool {
     // Create database
     let mut connection = PgConnection::connect(&config.connection_string_without_db())
