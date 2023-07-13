@@ -19,6 +19,7 @@ CREATE TABLE users(
         REFERENCES accounts(id),
     lastname TEXT NOT NULL,
     firstname TEXT,
+    email TEXT NOT NULL UNIQUE,
     position TEXT,
     role_code smallint NOT NULL
         REFERENCES roles(code),
