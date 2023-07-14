@@ -41,7 +41,7 @@ impl TestApp {
     {
         self.api_client
             .post(&format!("{}/accounts", &self.address))
-            .form(body)
+            .json(body)
             .send()
             .await
             .expect("Failed to execute request.")
