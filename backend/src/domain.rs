@@ -1,2 +1,4 @@
-mod entity;
-pub use entity::*;
+mod names;
+pub use names::*;
+mod email;
+pub use email::*;

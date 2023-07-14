@@ -2,25 +2,6 @@ use serde::Deserialize;
 use unicode_segmentation::UnicodeSegmentation;
 
 #[derive(Debug, Deserialize)]
-pub struct Email(String);
-
-impl Email {
-    pub fn parse(s: String) -> Result<Email, String> {
-        if validator::validate_email(&s) {
-            Ok(Self(s))
-        } else {
-            Err("not a valid email".to_string())
-        }
-    }
-}
-
-impl AsRef<str> for Email {
-    fn as_ref(&self) -> &str {
-        &self.0
-    }
-}
-
-#[derive(Debug, Deserialize)]
 pub struct CompanyName(String);
 
 impl CorrectName for CompanyName {}
@@ -28,6 +9,14 @@ impl CorrectName for CompanyName {}
 impl AsRef<str> for CompanyName {
     fn as_ref(&self) -> &str {
         &self.0
+    }
+}
+
+impl std::fmt::Display for CompanyName {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // We just forward to the Display implementation of
+        // the wrapped String.
+        self.0.fmt(f)
     }
 }
 
@@ -49,6 +38,14 @@ impl CorrectName for PeopleName {}
 impl AsRef<str> for PeopleName {
     fn as_ref(&self) -> &str {
         &self.0
+    }
+}
+
+impl std::fmt::Display for PeopleName {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // We just forward to the Display implementation of
+        // the wrapped String.
+        self.0.fmt(f)
     }
 }
 

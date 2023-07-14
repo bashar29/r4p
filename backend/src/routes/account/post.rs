@@ -26,11 +26,11 @@ impl TryFrom<FormData> for NewSubscriber {
 #[post("/accounts")]
 async fn create_account(params_account: web::Json<ParamsAccount>) -> impl Responder {
     println!(
-        "{:?}-{:?}-{:?}-{:?}",
-        params_account.company_name.as_ref(),
-        params_account.admin_firstname.as_ref(),
-        params_account.admin_lastname.as_ref(),
-        params_account.admin_email.as_ref()
+        "{}-{}-{}-{}",
+        params_account.company_name,
+        params_account.admin_firstname,
+        params_account.admin_lastname,
+        params_account.admin_email
     );
 
     HttpResponse::Ok().finish()
